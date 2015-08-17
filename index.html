@@ -93,6 +93,109 @@
   <div class="post-content">
     <header>
       
+      <time datetime="2015-08-11T02:11:00.000Z"><a href="/2015/08/11/20150817/">週二, 8月 11 2015, 10:11:00 上午</a></time>
+
+  
+    <h1 class="title"><a href="/2015/08/11/20150817/">解决ie6-8点击label里图片bug的几种方法</a></h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端开发/">前端开发</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/HTML/">HTML</a>, <a href="/tags/IE/">IE</a>, <a href="/tags/浏览器兼容/">浏览器兼容</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <p>在网页中使用input:radio元素和input:checkbox元素时，往往需要用label将说明用的文字、图片包起来，使得点击说明图文时也可以勾选input：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> id=<span class="string">"sex"</span>&gt;&lt;label <span class="keyword">for</span>=<span class="string">"sex"</span>&gt;男&lt;img src=<span class="string">"male.jpg"</span> /&gt;&lt;/label&gt;</span><br></pre></td></tr></table></figure>
+<p>但是在ie6-8中会存在一个bug：点击label中的图片不会勾选input。</p>
+<h2 id="解决方法如下：">解决方法如下：</h2><p>方法1，模拟点击：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"label img"</span>).live(<span class="string">"click"</span>, <span class="keyword">function</span>(e) &#123;</span><br><span class="line">    $(<span class="string">"#"</span> + $(this).parents(<span class="string">"label"</span>).attr(<span class="string">"for"</span>)).click();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="此外还找到了以下方法（未验证），有需要的情况可以试一下：">此外还找到了以下方法（未验证），有需要的情况可以试一下：</h2><p>方法2，设置img的disabled属性：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">""</span> disabled=<span class="string">""</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>方法3，使用span覆盖img：</p>
+<p>html结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;colgroup&gt;         </span><br><span class="line">        &lt;col width=<span class="string">"20%"</span>&gt;</span><br><span class="line">        &lt;col width=<span class="string">"60%"</span>&gt;                                    </span><br><span class="line">    &lt;/colgroup&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td class=<span class="string">"pay_bg"</span>&gt;通过支付宝平台进行转账&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"pay"</span> id=<span class="string">"zfb"</span>&gt;&lt;labelfor=<span class="string">"zfb"</span>&gt;&lt;span&gt;&lt;/span&gt;&lt;img src=<span class="string">"images/zfb.jpg"</span> alt=<span class="string">"支付宝"</span> height=<span class="string">"52"</span>width=<span class="string">"146"</span>&gt;&lt;/label&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td class=<span class="string">"pay_bg"</span>&gt;通过财付通平台进行转账&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"pay"</span> id=<span class="string">"cft"</span>&gt;&lt;labelfor=<span class="string">"cft"</span>&gt;&lt;span&gt;&lt;/span&gt;&lt;img src=<span class="string">"images/cft.jpg"</span> alt=<span class="string">"财付通"</span> height=<span class="string">"52"</span>width=<span class="string">"146"</span>&gt;&lt;/label&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td class=<span class="string">"pay_bg"</span>&gt;同方自有支付平台，更便捷更贴心&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"pay"</span> id=<span class="string">"zzf"</span>&gt;&lt;labelfor=<span class="string">"zzf"</span>&gt;&lt;span&gt;&lt;/span&gt;&lt;img src=<span class="string">"images/zzf.jpg"</span> alt=<span class="string">"最支付"</span> height=<span class="string">"52"</span>width=<span class="string">"146"</span>&gt;&lt;/label&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>css样式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">table label&#123;position:relative;oveflow:hidden&#125;</span><br><span class="line">table label span&#123;position:absolute;top:<span class="number">0</span>;left:<span class="number">0</span>;width:<span class="number">146</span>px;height:<span class="number">52</span>px;background:url(about:blank)no-repeat -<span class="number">5000</span>px&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>至此这个bug就解决了，不过在实际开发中，有时候会遇到这种情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;label <span class="keyword">for</span>=<span class="string">"hobby"</span>&gt;&lt;input <span class="built_in">type</span>=<span class="string">"checkbox"</span> id=<span class="string">"hobby"</span>&gt;跑步&lt;img src=<span class="string">"running.jpg"</span> /&gt;&lt;/label&gt;</span><br></pre></td></tr></table></figure>
+<p>因为布局等原因，input:checkbox被放在了label里面，这时候使用的代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//ie6-<span class="number">8</span>点击label里图片bug</span><br><span class="line">    	$(<span class="string">"label img"</span>).live(<span class="string">"click"</span>, <span class="keyword">function</span>(e) &#123;</span><br><span class="line">    		$(<span class="string">"#"</span> + $(this).parents(<span class="string">"label"</span>).attr(<span class="string">"for"</span>)).click();//不冒泡</span><br><span class="line">    		<span class="keyword">if</span> (e.preventDefault) &#123;</span><br><span class="line">    			e.preventDefault();</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			e.returnValue = <span class="literal">false</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;);</span><br></pre></td></tr></table></figure>
+<p>添加了preventDefault（ie下returnValue = false;）方法的调用，防止没有此bug的浏览器点击图片时checkbox被点击2次。</p>
+<p>如果需要模拟点击的事件冒泡，可以使用以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//ie6-<span class="number">8</span>点击label里图片bug</span><br><span class="line">    	$(<span class="string">"label img"</span>).live(<span class="string">"click"</span>, <span class="keyword">function</span>(e) &#123;</span><br><span class="line">    		document.getElementById($(this).parents(<span class="string">"label"</span>).attr(<span class="string">"for"</span>)).click();//冒泡</span><br><span class="line">    		<span class="keyword">if</span> (e.preventDefault) &#123;</span><br><span class="line">    			e.preventDefault();</span><br><span class="line">    		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    			e.returnValue = <span class="literal">false</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;);</span><br></pre></td></tr></table></figure>
+<p>也可以使用浏览器检测代替preventDefault，不过浏览器检测还是很有争议的，Jquery1.9已经废弃了$.browser，不推荐使用。</p>
+
+      
+    </div>
+    <footer>
+      
+        <div class="alignleft">
+            <a href="/2015/08/11/20150817/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
+        </div>
+        
+        
+          <div class="alignright"> 
+            <a href="http://ym2067.com/2015/08/11/20150817/#comment" class="comment-link">
+              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/08/11/20150817/">&nbsp;
+              </span>
+            </a>
+          </div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ym2067com';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
       <time datetime="2015-08-11T02:11:00.000Z"><a href="/2015/08/11/20150811/">週二, 8月 11 2015, 10:11:00 上午</a></time>
 
   
