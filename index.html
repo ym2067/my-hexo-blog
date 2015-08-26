@@ -93,10 +93,96 @@
   <div class="post-content">
     <header>
       
-      <time datetime="2015-08-11T02:11:00.000Z"><a href="/2015/08/11/20150817/">週二, 8月 11 2015, 10:11:00 上午</a></time>
+      <time datetime="2015-08-26T02:26:51.000Z"><a href="/2015/08/26/20150826/">週三, 8月 26 2015, 10:26:51 上午</a></time>
 
   
-    <h1 class="title"><a href="/2015/08/11/20150817/">解决ie6-8点击label里图片bug的几种方法</a></h1>
+    <h1 class="title"><a href="/2015/08/26/20150826/">解决ie7下position:fixed时li元素hover残影问题</a></h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端开发/">前端开发</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/HTML/">HTML</a>, <a href="/tags/IE/">IE</a>, <a href="/tags/浏览器兼容/">浏览器兼容</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <p>今天遇到了个奇怪的问题，页面左侧有个导航列表，页面滚动后设置它position:fixed相对屏幕定位，在ie7里当导航position:fixed时，里面的列表项li在鼠标滑过时会出现奇怪的残影，显示效果一团糟。ie8及其他浏览器显示正常。</p>
+<p>研究下发下li里包含的a的display: inline-block;与li平级的div的display: block; li自己的是用户代理的默认样式display: list-item;</p>
+<p>于是把li的样式设为display: block;问题解决</p>
+<p><img src="/images/ie7根据相对浏览器窗口定位的li问题.png" alt="DOM结构"></p>
+<p>总结了一下，IE7刚开始支持position:fixed，使用position:fixed属性时要注意看下IE7的效果。</p>
+
+      
+    </div>
+    <footer>
+      
+        <div class="alignleft">
+            <a href="/2015/08/26/20150826/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
+        </div>
+        
+        
+          <div class="alignright"> 
+            <a href="http://ym2067.com/2015/08/26/20150826/#comment" class="comment-link">
+              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/08/26/20150826/">&nbsp;
+              </span>
+            </a>
+          </div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ym2067com';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+      <time datetime="2015-08-17T02:11:00.000Z"><a href="/2015/08/17/20150817/">週一, 8月 17 2015, 10:11:00 上午</a></time>
+
+  
+    <h1 class="title"><a href="/2015/08/17/20150817/">解决ie6-8点击label里图片bug的几种方法</a></h1>
   
 
 
@@ -146,13 +232,13 @@
     <footer>
       
         <div class="alignleft">
-            <a href="/2015/08/11/20150817/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
+            <a href="/2015/08/17/20150817/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
         </div>
         
         
           <div class="alignright"> 
-            <a href="http://ym2067.com/2015/08/11/20150817/#comment" class="comment-link">
-              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/08/11/20150817/">&nbsp;
+            <a href="http://ym2067.com/2015/08/17/20150817/#comment" class="comment-link">
+              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/08/17/20150817/">&nbsp;
               </span>
             </a>
           </div>
