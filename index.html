@@ -120,10 +120,16 @@
       
         <p>今天遇到了个奇怪的问题，页面左侧有个导航列表，页面滚动后设置它position:fixed相对屏幕定位，在ie7里当导航position:fixed时，里面的列表项li在鼠标滑过时会出现奇怪的残影，显示效果一团糟。ie8及其他浏览器显示正常。</p>
 <p>研究下发下li里包含的a的display: inline-block;与li平级的div的display: block; li自己的是用户代理的默认样式display: list-item;</p>
-<p>于是把li的样式设为display: block;问题解决</p>
+<p><s>于是把li的样式设为display: block;问题解决</s></p>
 <p><img src="/images/ie7根据相对浏览器窗口定位的li问题.png" alt="DOM结构"></p>
 <p>总结了一下，IE7刚开始支持position:fixed，使用position:fixed属性时要注意看下IE7的效果。</p>
+<p><mark>更新：之前的方法并没有解决问题，后来发现a的设置的宽度与外面等宽，缩小了a的宽度问题得以解决。</mark></p>
+<p><img src="/images/ie7浮动li解决办法.png" alt="解决办法"></p>
+<h4>补充IE6、7下css hack的2方法</h4>
 
+<h4>1、IE6单独识别（margin-left对于只有IE6错位情况下）<br>{margin-left:5px;_margin-left:2px;}<br>这个时候除IE6外其它浏览器设别margin-left:5px，IE6单独识别_margin-left:2px</h4>
+
+<h4>2、IE7与IE6都识别（margin-left对于ie6和ie7识别其它版本和品牌浏览器不识别）<br>{margin-left:5px;<em>margin-left:2px;}<br>这个时候除IE6和IE7外，其它浏览器设别margin-left:5px，IE6和IE7识别</em>margin-left:2px</h4>
       
     </div>
     <footer>
