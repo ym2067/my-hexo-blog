@@ -93,6 +93,103 @@
   <div class="post-content">
     <header>
       
+      <time datetime="2015-11-10T03:47:16.000Z"><a href="/2015/11/10/20151110/">週二, 11月 10 2015, 11:47:16 中午</a></time>
+
+  
+    <h1 class="title"><a href="/2015/11/10/20151110/">防止重复提交ajax请求</a></h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端开发/">前端开发</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/JS/">JS</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <p>最近项目中涉及防止重复提交的功能，研究后发现两种简单实用的方法，可以应对大多数简单防重复提交的情景：</p>
+<p>A. 独占型提交</p>
+<p>只允许同时存在一次提交操作，并且直到本次提交完成才能进行下一次提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.submit = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="keyword">if</span> (this.promise_.state() === <span class="string">'pending'</span>) &#123;</span><br><span class="line">    <span class="built_in">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> this.promise_ = $.post(<span class="string">'/api/save'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>B. 贪婪型提交</p>
+<p>无限制的提交，但是以最后一次操作为准；亦即需要尽快给出最后一次操作的反馈，而前面的操作结果并不重要。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.submit = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="keyword">if</span> (this.promise_.state() === <span class="string">'pending'</span>) &#123;</span><br><span class="line">    this.promise_.abort()</span><br><span class="line">  &#125;</span><br><span class="line">  // todo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于页面上有多个按钮，它们请求同一个url，根据以上原理写了个防止重复提交的序列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> sendEnableAndDisable(id,data)&#123;</span><br><span class="line">		<span class="keyword">if</span> (typeof(this.promise_) == <span class="string">"undefined"</span>)&#123;</span><br><span class="line">			this.promise_ = [];</span><br><span class="line">		&#125;</span><br><span class="line">	    </span><br><span class="line">	    var url = <span class="string">"/as-school/ajax/abilityCurrencyTask/updateStatus"</span>;</span><br><span class="line">	    //以取消上次提交的方式，防止重复提交</span><br><span class="line">	    <span class="keyword">if</span> (this.promise_[id] != null &amp;&amp; this.promise_[id].state() === <span class="string">'pending'</span>) &#123;</span><br><span class="line">	    	this.promise_[id].abort();</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="built_in">return</span> this.promise_[id] =$.post(url, data, <span class="keyword">function</span>(data)&#123;</span><br><span class="line">	    	var data =  $.parseJSON(data);</span><br><span class="line">	    	<span class="keyword">if</span>(data.success == <span class="literal">true</span>) &#123;</span><br><span class="line">	    	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	    	&#125;</span><br><span class="line">	    &#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>如果用户采取暴力破解，直接访问ajaxurl，至少有3种防范方法</p>
+<ul>
+<li>限制请求频率</li>
+<li>自动探测重复内容</li>
+<li>为提交内容关联一个唯一的 client id</li>
+</ul>
+<p>参考文档：<br><a href="http://www.zhihu.com/question/19805411" target="_blank" rel="external">http://www.zhihu.com/question/19805411</a></p>
+
+      
+    </div>
+    <footer>
+      
+        <div class="alignleft">
+            <a href="/2015/11/10/20151110/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
+        </div>
+        
+        
+          <div class="alignright"> 
+            <a href="http://ym2067.com/2015/11/10/20151110/#comment" class="comment-link">
+              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/11/10/20151110/">&nbsp;
+              </span>
+            </a>
+          </div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ym2067com';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
       <time datetime="2015-08-26T02:26:51.000Z"><a href="/2015/08/26/20150826/">週三, 8月 26 2015, 10:26:51 上午</a></time>
 
   
