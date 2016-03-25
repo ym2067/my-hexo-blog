@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery操作DOM方法总结下:替换与移除 | Ym2067</title>
+  <meta name="author" content="Ym2067">
+  
+  <meta name="description" content="四、替换内容1.$(selector).html(content)与$(selector).text(content)的区别：通过.html()设置内容时，使用预留字符会被解析成DOM结构。如果不希望这样解析，需要使用字符实体（character entities）
+例如符号&amp;lt;需要替换成&amp;am">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jQuery操作DOM方法总结下:替换与移除"/>
+  <meta property="og:site_name" content="Ym2067"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Ym2067" type="application/atom+xml">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-368771XX-X']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class='normal_mode'>
+    <nav id="main-nav">
+  <ul class='container'>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+  </header>
+  <div id="content" class="container">
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+      <time datetime="2015-11-25T07:04:53.000Z"><a href="/2015/11/25/20151125/">週三, 11月 25 2015, 3:04:53 下午</a></time>
+
+  
+    <h1 class="title">jQuery操作DOM方法总结下:替换与移除</h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端开发/">前端开发</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/JS/">JS</a>, <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="四、替换内容">四、替换内容</h2><h3 id="1-$(selector)-html(content)与$(selector)-text(content)的区别：">1.$(selector).html(content)与$(selector).text(content)的区别：</h3><p>通过.html()设置内容时，使用预留字符会被解析成DOM结构。如果不希望这样解析，需要使用字符实体（character entities）</p>
+<pre><code>例如符号&lt;需要替换成&amp;lt<span class="comment">;</span>
+</code></pre><p>而通过.text()设置内容时，所有html实体会被转换成相应字符。输入&lt;时会自动变成等价的字符实体。</p>
+<pre><code>HTML 中有用的字符实体
+注释：实体名称对大小写敏感！
+显示结果    描述        实体名称    实体编号
+             空格        &amp;nbsp;        &amp;<span class="comment">#160;</span>
+    &lt;        小于号        &amp;lt;        &amp;<span class="comment">#60;</span>
+    &gt;        大于号        &amp;gt;        &amp;<span class="comment">#62;</span>
+    &amp;        和号        &amp;amp;        &amp;<span class="comment">#38;</span>
+    "        引号        &amp;quot;        &amp;<span class="comment">#34;</span>
+    '        撇号         &amp;apos; (IE不支持)    &amp;<span class="comment">#39;</span>
+    ￠        分            &amp;cent;        &amp;<span class="comment">#162;</span>
+    £        镑            &amp;pound;        &amp;<span class="comment">#163;</span>
+    ¥        日圆        &amp;yen;        &amp;<span class="comment">#165;</span>
+    €        欧元        &amp;euro;        &amp;<span class="comment">#8364;</span>
+    §        小节        &amp;sect;        &amp;<span class="comment">#167;</span>
+    ©        版权        &amp;<span class="built_ins">copy</span>;        &amp;<span class="comment">#169;</span>
+    ®        注册商标    &amp;reg;        &amp;<span class="comment">#174;</span>
+    ™        商标        &amp;trade;        &amp;<span class="comment">#8482;</span>
+    ×        乘号        &amp;times;        &amp;<span class="comment">#215;</span>
+    ÷        除号        &amp;divide;    &amp;<span class="comment">#247;</span>
+</code></pre><h3 id="2-$(content)-replaceAll(selector)与$(selector)-replaceWith(content)/$(selector)-replaceWith(function())">2.$(content).replaceAll(selector)与$(selector).replaceWith(content)/$(selector).replaceWith(function())</h3><p>与添加内容相似，.repalceWith()是.replaceAll()的反向操作。</p>
+<h2 id="五、移除内容">五、移除内容</h2><h3 id="1-移除元素">1.移除元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).empty()</span><br></pre></td></tr></table></figure>
+<p>从selector中移除所有子内容，包括所有文本和子节点；但保留selector本身，以及保留所有的事件、jQuery数据。</p>
+<h3 id="2-从文档中移除，但在jQuery中保留">2.从文档中移除，但在jQuery中保留</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).detach()</span><br></pre></td></tr></table></figure>
+<p>在文档中移除selector，在jQuery对象中保留所有的事件、jQuery数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).remove()</span><br></pre></td></tr></table></figure>
+<p>在文档中移除selector，在jQuery对象中只保留被选元素本身，移除所有事件、jQuery数据。</p>
+
+      
+    </div>
+    <footer>
+      
+          
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <span class="jiathis_txt">分享到：</span>
+  <a class="jiathis_button_weixin">微信</a>
+  <a class="jiathis_button_tsina">新浪微博</a>
+  <a class="jiathis_button_renren">人人网</a>
+  <a class="jiathis_button_qzone">QQ空间</a>
+  <a class="jiathis_button_douban">豆瓣</a>
+  <a class="jiathis_button_pocket">Pocket</a>
+  <a href="http://www.jiathis.com/share?uid=901656" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=901656" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+          <div class="clearfix"></div>
+          <nav id="pagination">
+  
+  
+    <a href="/2015/11/24/20151124/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+  
+  <div class="clearfix"></div>
+</nav>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-thread-key="/2015/11/25/20151125/"></div>
+<!-- Duoshuo Comment END -->
+  
+</section>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ym2067com';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div>
+  
+  &copy; 2016 Ym2067
+  
+</div>
+Powered by <a href="http://zespia.tw/hexo/" title="Hexo" target="_blank" rel="external">Hexo</a> and <a href="http://pages.github.com/" title="GitHub Pages" target="_blank" rel="external">GitHub Pages</a>
+
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery.imagesloaded.min.js" type="text/javascript"></script>
+<script src="/js/gallery.js" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'ym2067com';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+    <script type="text/javascript">
+        (function(){
+
+            $(window).scroll(function(){
+
+                var scrollTop = $(window).scrollTop();
+                if ( scrollTop >200 ){
+                    $("#main-nav").removeClass('normal_mode').addClass('top_mode');
+                } else{
+                    $("#main-nav").removeClass('top_mode').addClass('normal_mode');
+                }
+
+            });
+
+        })();
+    </script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox({
+      'titlePosition': 'inside'
+    });
+  })(jQuery);
+  </script>
+
+
+
+    
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"your_id"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    $('.title').hover(
+      function() {      
+        $(this).stop().animate(
+          {'marginLeft': '10px'}, 200
+        );   
+      }, 
+      function() {       
+        $(this).stop().animate({'marginLeft': '0px'}, 200);      
+      
+    });   
+
+  });
+
+</script>
+
+
+</body>
+</html>

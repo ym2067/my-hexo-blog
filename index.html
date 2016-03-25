@@ -93,10 +93,120 @@
   <div class="post-content">
     <header>
       
+      <time datetime="2015-11-25T07:04:53.000Z"><a href="/2015/11/25/20151125/">週三, 11月 25 2015, 3:04:53 下午</a></time>
+
+  
+    <h1 class="title"><a href="/2015/11/25/20151125/">jQuery操作DOM方法总结下:替换与移除</a></h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端开发/">前端开发</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/JS/">JS</a>, <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="四、替换内容">四、替换内容</h2><h3 id="1-$(selector)-html(content)与$(selector)-text(content)的区别：">1.$(selector).html(content)与$(selector).text(content)的区别：</h3><p>通过.html()设置内容时，使用预留字符会被解析成DOM结构。如果不希望这样解析，需要使用字符实体（character entities）</p>
+<pre><code>例如符号&lt;需要替换成&amp;lt<span class="comment">;</span>
+</code></pre><p>而通过.text()设置内容时，所有html实体会被转换成相应字符。输入&lt;时会自动变成等价的字符实体。</p>
+<pre><code>HTML 中有用的字符实体
+注释：实体名称对大小写敏感！
+显示结果    描述        实体名称    实体编号
+             空格        &amp;nbsp;        &amp;<span class="comment">#160;</span>
+    &lt;        小于号        &amp;lt;        &amp;<span class="comment">#60;</span>
+    &gt;        大于号        &amp;gt;        &amp;<span class="comment">#62;</span>
+    &amp;        和号        &amp;amp;        &amp;<span class="comment">#38;</span>
+    "        引号        &amp;quot;        &amp;<span class="comment">#34;</span>
+    '        撇号         &amp;apos; (IE不支持)    &amp;<span class="comment">#39;</span>
+    ￠        分            &amp;cent;        &amp;<span class="comment">#162;</span>
+    £        镑            &amp;pound;        &amp;<span class="comment">#163;</span>
+    ¥        日圆        &amp;yen;        &amp;<span class="comment">#165;</span>
+    €        欧元        &amp;euro;        &amp;<span class="comment">#8364;</span>
+    §        小节        &amp;sect;        &amp;<span class="comment">#167;</span>
+    ©        版权        &amp;<span class="built_ins">copy</span>;        &amp;<span class="comment">#169;</span>
+    ®        注册商标    &amp;reg;        &amp;<span class="comment">#174;</span>
+    ™        商标        &amp;trade;        &amp;<span class="comment">#8482;</span>
+    ×        乘号        &amp;times;        &amp;<span class="comment">#215;</span>
+    ÷        除号        &amp;divide;    &amp;<span class="comment">#247;</span>
+</code></pre><h3 id="2-$(content)-replaceAll(selector)与$(selector)-replaceWith(content)/$(selector)-replaceWith(function())">2.$(content).replaceAll(selector)与$(selector).replaceWith(content)/$(selector).replaceWith(function())</h3><p>与添加内容相似，.repalceWith()是.replaceAll()的反向操作。</p>
+<h2 id="五、移除内容">五、移除内容</h2><h3 id="1-移除元素">1.移除元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).empty()</span><br></pre></td></tr></table></figure>
+<p>从selector中移除所有子内容，包括所有文本和子节点；但保留selector本身，以及保留所有的事件、jQuery数据。</p>
+<h3 id="2-从文档中移除，但在jQuery中保留">2.从文档中移除，但在jQuery中保留</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).detach()</span><br></pre></td></tr></table></figure>
+<p>在文档中移除selector，在jQuery对象中保留所有的事件、jQuery数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).remove()</span><br></pre></td></tr></table></figure>
+<p>在文档中移除selector，在jQuery对象中只保留被选元素本身，移除所有事件、jQuery数据。</p>
+
+      
+    </div>
+    <footer>
+      
+        <div class="alignleft">
+            <a href="/2015/11/25/20151125/#more" class="more-link"><i class="fa fa-chevron-right"></i>Read More</a>
+        </div>
+        
+        
+          <div class="alignright"> 
+            <a href="http://ym2067.com/2015/11/25/20151125/#comment" class="comment-link">
+              <i class="fa fa-comments"></i><span class="ds-thread-count" data-thread-key="/2015/11/25/20151125/">&nbsp;
+              </span>
+            </a>
+          </div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'ym2067com';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
       <time datetime="2015-11-24T09:58:27.000Z"><a href="/2015/11/24/20151124/">週二, 11月 24 2015, 5:58:27 下午</a></time>
 
   
-    <h1 class="title"><a href="/2015/11/24/20151124/">jQuery操作DOM方法</a></h1>
+    <h1 class="title"><a href="/2015/11/24/20151124/">jQuery操作DOM方法总结上:插入、移动与包裹</a></h1>
   
 
 
@@ -120,30 +230,34 @@
       
         <p>开发中需要操作DOM的时候很多，如何选择合适的方法是个问题。我把常用的方法和场景做了个简单的总结:</p>
 <p>假设要添加的元素为content，现有元素为selector</p>
-<p>一、添加内容</p>
-<p>1.在现有元素内部之前添加内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).prependTo(selector)</span><br></pre></td></tr></table></figure></p>
+<h2 id="一、添加内容">一、添加内容</h2><p>添加内容的方法可以分成4对，它们是.prependTo()与.prepend()，.appendTo()与.append()，.insertBefore()与.before()，.insertAfter()与.after()。</p>
+<p>每一对间2个方法的区别是：例如$(content).prependTo(selector)和$(selector).prepend(content)，它们的区别是:</p>
+<pre><code><span class="attribute">content</span>与selector的位置不同，
+.<span class="function"><span class="title">prepend</span><span class="params">()</span></span>可以接受<span class="function"><span class="title">function</span><span class="params">()</span></span>做参数
+</code></pre><p>这个例子中，我把后者称为前者的<code>“反向操作”</code>，下同</p>
+<h3 id="1-在现有元素内部之前添加内容">1.在现有元素内部之前添加内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).prependTo(selector)</span><br></pre></td></tr></table></figure>
 <p>反向操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).prepend(content)</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(selector).prepend(<span class="keyword">function</span>(index,html))</span><br><span class="line">--index接收选择器的 index 位置。</span><br><span class="line">--html接收选择器的当前 HTML。</span><br></pre></td></tr></table></figure></p>
-<p>2.在现有元素内部之后添加内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).appendTo(selector)</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-在现有元素内部之后添加内容">2.在现有元素内部之后添加内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).appendTo(selector)</span><br></pre></td></tr></table></figure>
 <p>反向操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).append(content)</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(selector).append(<span class="keyword">function</span>(index,html))</span><br><span class="line">--index接收选择器的 index 位置。</span><br><span class="line">--html接收选择器的当前 HTML。</span><br></pre></td></tr></table></figure></p>
-<p>3.在现有元素外部之前添加内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).insertBefore(selector)</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-在现有元素外部之前添加内容">3.在现有元素外部之前添加内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).insertBefore(selector)</span><br></pre></td></tr></table></figure>
 <p>反向操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).before(content)</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(selector).before(<span class="keyword">function</span>(index))</span><br><span class="line">--index接收选择器的 index 位置。</span><br></pre></td></tr></table></figure></p>
-<p>4.在现有元素外部之后添加内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).insertAfter(selector)</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-在现有元素外部之后添加内容">4.在现有元素外部之后添加内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(content).insertAfter(selector)</span><br></pre></td></tr></table></figure>
 <p>反向操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).after(content)</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(selector).after(<span class="keyword">function</span>(index))</span><br><span class="line">--index接收选择器的 index 位置。</span><br></pre></td></tr></table></figure></p>
-<p>二、移动内容</p>
-<p>把上面添加内容操作中的content替换成selector即可移动文档中的DOM节点。</p>
+<h2 id="二、移动内容">二、移动内容</h2><p>把上面添加内容操作中的content替换成selector即可移动文档中的DOM节点。</p>
 <p>例如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector1).prependTo(selector2)</span><br></pre></td></tr></table></figure></p>
 <p>即会把DOM中selector1中的节点移动到selector2的内部之前</p>
-<p>三、warp的用法</p>
-<p>$(selector).wrap(wrapper) 和 $(selector).wrapAll(wrapper) 的区别是:</p>
-<pre><code><span class="function"><span class="title">wrap</span><span class="params">()</span></span>会把迭代出的每个元素分别包装在wrapper里
+<h2 id="三、包裹内容">三、包裹内容</h2><p>$(selector).wrap(wrapper) 和 $(selector).wrapInner(wrapper) 与 $(selector).wrapAll(wrapper)的区别是:</p>
+<pre><code><span class="function"><span class="title">wrap</span><span class="params">()</span></span>会把迭代出的每个元素分别包装在wrapper里。
+
+<span class="function"><span class="title">warpInner</span><span class="params">()</span></span>把每个元素的子内容包装到wrapper里。
 
 <span class="function"><span class="title">wrapAll</span><span class="params">()</span></span>把所有元素最外面包装到wrapper里。
 </code></pre><p>例如:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'span.footnote'</span>)</span><br><span class="line">	.insertBefore(<span class="string">'#footer'</span>)</span><br><span class="line">	.wrapAll(<span class="string">'&lt;ol id="notes"&gt;&lt;/ol&gt;'</span>)</span><br><span class="line">	.wrap(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'span.footnote'</span>)</span><br><span class="line">.insertBefore(<span class="string">'#footer'</span>)</span><br><span class="line">.wrapAll(<span class="string">'&lt;ol id="notes"&gt;&lt;/ol&gt;'</span>)</span><br><span class="line">.wrap(<span class="string">'&lt;li&gt;&lt;/li&gt;'</span>);</span><br></pre></td></tr></table></figure>
 <pre><code>需要注意的是，由于这里的$(<span class="string">'span.footnote'</span>)是分布在文档各处的，如果去掉了.<span class="function"><span class="title">insertBefore</span><span class="params">(<span class="string">'#footer'</span>)</span></span>直接.<span class="function"><span class="title">wrapAll</span><span class="params">(<span class="string">'&lt;ol id="notes"&gt;&lt;/ol&gt;'</span>)</span></span>的话，会自动将所有$(<span class="string">'span.footnote'</span>)移动到第一个$(<span class="string">'span.footnote'</span>)处并包裹起来。
 </code></pre>
       
