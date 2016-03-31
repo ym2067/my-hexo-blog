@@ -96,6 +96,7 @@
       
     </header>
     <div class="entry">
+      <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="Ym2067">Ym2067</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="Ym2067">Ym2067</a></b>,本文标题为<b><a href="/2015/08/11/20150811/" target="_blank" title="解决IE8、IE7下radio和checkbox元素不触发onchange事件Bug">解决IE8、IE7下radio和checkbox元素不触发onchange事件Bug</a></b>,本文链接为<b><a href="/2015/08/11/20150811/" target="_blank" title="解决IE8、IE7下radio和checkbox元素不触发onchange事件Bug">http://ym2067.com/2015/08/11/20150811/</a></b>.</code></pre>
       
         <p>由于IE8、IE7的bug，radio和checkbox元素的onchange事件是不能触发的，比如这段代码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"Q12"</span> value=<span class="string">"radio"</span> id=<span class="string">"Q12_0"</span>  onchange=<span class="string">"nextPnl('Q12');"</span>&gt;</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"Q12"</span> value=<span class="string">"radio"</span> id=<span class="string">"Q12_1"</span>  onchange=<span class="string">"nextPnl('Q12');"</span>&gt;</span><br></pre></td></tr></table></figure>
